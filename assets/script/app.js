@@ -1,5 +1,9 @@
 import * as utils from './utils.js';
+import { User, Subscriber } from './User.js';
+
 'use strict';
+
+const headerPfp = document.querySelector('.pfp-div');
 
 const postComposer = document.querySelector('.post-composer');
 const textarea = document.querySelector('.post-composer textarea');
