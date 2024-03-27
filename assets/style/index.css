@@ -113,6 +113,10 @@ nav ul li a {
   color: white;
 }
 
+.file-name {
+  color: var(--white-font);
+}
+
 /* ==============================Post Card============================== */
 .post-card {
   border: 1px solid #ccc;

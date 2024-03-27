@@ -11,9 +11,11 @@ const modalContent = document.querySelector('#modal-content');
 
 const postComposer = document.querySelector('.post-composer');
 const textarea = document.querySelector('.post-composer textarea');
+const uploadContainer = document.querySelector('.upload-container');
 const composerActions = document.querySelector('.composer-actions');
 const uploadBtn = document.querySelector('.upload-btn');
 const imageUpload = document.querySelector('.image-upload');
+
 
 const postBtn = document.querySelector('.post-btn');
 const postCard = document.querySelector('.post-card');
@@ -28,6 +30,15 @@ const postImage = document.querySelector('.post-image');
 uploadBtn.addEventListener('click', function(event) {
   event.preventDefault();
   imageUpload.click();
+});
+
+imageUpload.addEventListener('change', function() {
+  if (this.files && this.files[0]) {
+    // Get the span for the file name
+    let fileName = document.querySelector('.file-name');
+    // Set its text to the file name
+    fileName.textContent = this.files[0].name;
+  }
 });
 
 function createPostCard(userName, postDate, postContent, postImageSrc) {
@@ -88,6 +99,8 @@ postBtn.addEventListener('click', function(event) {
     // Clear the textarea
     textarea.value = '';
   }
+
+  document.querySelector('.file-name').innerText = '';
 });
 
 const johnDoe = new Subscriber(
