@@ -30,14 +30,14 @@ uploadBtn.addEventListener('click', function(event) {
   imageUpload.click();
 });
 
-function createPostCard(profilePicSrc, userName, postDate, postContent, postImageSrc) {
+function createPostCard(userName, postDate, postContent, postImageSrc) {
   // Create new post card
   const newPostCard = document.createElement('div');
   newPostCard.className = 'post-card';
   newPostCard.innerHTML = `
     <div class="post-header">
       <div class="user-info">
-        <img class="profile-pic" src="${profilePicSrc}" alt="User profile picture">
+        <img class="profile-pic" src="./assets/media/pfp.jpg" alt="User profile picture">
         <h4 class="username">${userName}</h4>
       </div>
       <p class="post-date">${postDate}</p>
@@ -60,8 +60,7 @@ postBtn.addEventListener('click', function(event) {
       postImageSrc = reader.result;
 
       const newPostCard = createPostCard(
-        'profile.jpg',
-        'User Name',
+        'John Doe',
         new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
         textarea.value,
         postImageSrc
@@ -77,8 +76,7 @@ postBtn.addEventListener('click', function(event) {
     reader.readAsDataURL(imageUpload.files[0]);
   } else {
     const newPostCard = createPostCard(
-      'profile.jpg',
-      'User Name',
+      'John Doe',
       new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
       textarea.value,
       postImageSrc
