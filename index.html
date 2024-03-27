@@ -19,6 +19,37 @@
     <script type="module" src="./assets/script/app.js"></script>
   </head>
   <body>
-    
+    <header>
+      <div class="container flex">
+        <div class="logo-div flex">
+          Fakebook
+        </div>
+        <nav>
+          <ul>
+            <li><a href="#">Friends</a></li>
+            <li><a href="#">Pages</a></li>
+            <li><a href="#">Groups</a></li>
+            <li><a href="#">My ads</a></li>
+            <li><a href="#">Settings</a></li>
+          </ul>
+        </nav>
+        <div class="pfp-div flex">
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="container">
+        <form class="post-composer">
+          <textarea placeholder="What's on your mind?"></textarea>
+          <div class="composer-actions">
+            <input type="file" accept="image/*" class="image-upload" style="display: none;">
+            <button class="upload-btn">Upload Image</button>
+            <button class="post-btn">Post</button>
+          </div>
+        </form>
+      </div>
+    </main>
+
   </body>
 </html>
