@@ -4,6 +4,10 @@ import { User, Subscriber } from './User.js';
 'use strict';
 
 const headerPfp = document.querySelector('.pfp-div');
+const modal = document.querySelector('#modal');
+const closeModal = document.querySelector('#close-modal');
+const modalContent = document.querySelector('#modal-content');
+
 
 const postComposer = document.querySelector('.post-composer');
 const textarea = document.querySelector('.post-composer textarea');
@@ -86,4 +90,23 @@ postBtn.addEventListener('click', function(event) {
     // Clear the textarea
     textarea.value = '';
   }
+});
+
+const johnDoe = new Subscriber(
+  1, // id
+  'John Doe', // name
+  'johndoe', // userName
+  'johndoe@gmail.com', // email
+  ['Mr. Bean', 'Netflix'], // pages
+  ['Winnipeg Market', 'Alcoholics Anonymous'], // groups
+  true // canMonetize
+);
+
+headerPfp.addEventListener('click', function() {
+  modalContent.textContent = johnDoe.getInfo();
+  modal.showModal();
+});
+
+closeModal.addEventListener('click', function() {
+  modal.close();
 });
