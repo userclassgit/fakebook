@@ -21,63 +21,69 @@ const postDate = document.querySelector('.post-date');
 const postContent = document.querySelector('.post-content');
 const postImage = document.querySelector('.post-image');
 
-// postBtn.addEventListener('click', function() {
-//   event.preventDefault();
-//   postCard.style.display = 'block';
-// });
-
 uploadBtn.addEventListener('click', function(event) {
   event.preventDefault();
   imageUpload.click();
 });
 
+function createPostCard(profilePicSrc, userName, postDate, postContent, postImageSrc) {
+  // Create new post card
+  const newPostCard = document.createElement('div');
+  newPostCard.className = 'post-card';
+  newPostCard.innerHTML = `
+    <div class="post-header">
+      <div class="user-info">
+        <img class="profile-pic" src="${profilePicSrc}" alt="User profile picture">
+        <h4 class="username">${userName}</h4>
+      </div>
+      <p class="post-date">${postDate}</p>
+    </div>
+    <p class="post-content">${postContent}</p>
+    ${postImageSrc ? `<img class="post-image" src="${postImageSrc}" alt="Uploaded content">` : ''}
+  `;
+
+  return newPostCard;
+}
+
 postBtn.addEventListener('click', function(event) {
   event.preventDefault();
 
-  const reader = new FileReader();
-  reader.onloadend = function() {
-    newPostImage.src = reader.result;
-  }
+  let postImageSrc = null;
+
   if (imageUpload.files[0]) {
+    const reader = new FileReader();
+    reader.onloadend = function() {
+      postImageSrc = reader.result;
+
+      const newPostCard = createPostCard(
+        'profile.jpg',
+        'User Name',
+        new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+        textarea.value,
+        postImageSrc
+      );  
+
+      // Insert the new post card into the DOM
+      postComposer.insertAdjacentElement('afterend', newPostCard);
+
+      // Clear the textarea and image upload input
+      textarea.value = '';
+      imageUpload.value = '';
+    }
     reader.readAsDataURL(imageUpload.files[0]);
+  } else {
+    const newPostCard = createPostCard(
+      'profile.jpg',
+      'User Name',
+      new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+      textarea.value,
+      postImageSrc
+    );  
+
+    // Insert the new post card into the DOM
+    postComposer.insertAdjacentElement('afterend', newPostCard);
+
+    // Clear the textarea
+    textarea.value = '';
   }
-
-  // Create new post card elements
-  const newPostCard = document.createElement('div');
-  const newPostHeader = document.createElement('div');
-  const newUserInfo = document.createElement('div');
-  const newProfilePic = document.createElement('img');
-  const newUsername = document.createElement('h4');
-  const newPostDate = document.createElement('p');
-  const newPostContent = document.createElement('p');
-  const newPostImage = document.createElement('img');
-
-  // Set attributes and content
-  newPostCard.className = 'post-card';
-  newPostHeader.className = 'post-header';
-  newUserInfo.className = 'user-info';
-  newProfilePic.className = 'profile-pic';
-  newProfilePic.src = 'profile.jpg';
-  newProfilePic.alt = 'User profile picture';
-  newUsername.className = 'username';
-  newUsername.textContent = 'User Name';
-  newPostDate.className = 'post-date';
-  newPostDate.textContent = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-  newPostContent.className = 'post-content';
-  newPostContent.textContent = textarea.value;
-  newPostImage.className = 'post-image';
-  newPostImage.src = 'uploaded-image.jpg';
-  newPostImage.alt = 'Uploaded content';
-
-  // Build the post card
-  newUserInfo.append(newProfilePic, newUsername);
-  newPostHeader.append(newUserInfo, newPostDate);
-  newPostCard.append(newPostHeader, newPostContent, newPostImage);
-
-  // Insert the new post card into the DOM
-  postComposer.insertAdjacentElement('afterend', newPostCard);
-
-  // Clear the textarea and image upload input
-  textarea.value = '';
-  imageUpload.value = '';
 });
