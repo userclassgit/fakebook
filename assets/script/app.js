@@ -4,26 +4,28 @@ import { User, Subscriber } from './User.js';
 'use strict';
 
 const headerPfp = document.querySelector('.pfp-div');
+
 const modal = document.querySelector('.modal');
 const closeModal = document.querySelector('.close-modal');
 const modalContent = document.querySelector('.modal-content');
+
 const postComposer = document.querySelector('.post-composer');
 const textarea = document.querySelector('.post-composer textarea');
 const uploadBtn = document.querySelector('.upload-btn');
 const imageUpload = document.querySelector('.image-upload');
+const fileName = document.querySelector('.file-name');
 const postBtn = document.querySelector('.post-btn');
 
 uploadBtn.addEventListener('click', function(event) {
   event.preventDefault();
-  imageUpload.click();
+  imageUpload.click(); //this opens the file picker dialogue so u can select an image
 });
 
 imageUpload.addEventListener('change', function() {
-  if (this.files && this.files[0]) {
-    // Get the span for the file name
-    let fileName = document.querySelector('.file-name');
-    // Set its text to the file name
-    fileName.textContent = this.files[0].name;
+  // a 'change' event occurs when you select a file from the file picker dialog
+  if (this.files && this.files[0]) { //checks if at least 1 file has been selected
+    // set its text to the file name
+    fileName.textContent = this.files[0].name;// sets the span next to uploadBtn to the file name
   }
 });
 
@@ -31,6 +33,7 @@ function createPostCard(postContent, postImageSrc) {
   // Create new post card
   const newPostCard = document.createElement('div');
   newPostCard.className = 'post-card';
+  // The HTML for the content of the new post card
   newPostCard.innerHTML = `
     <div class="post-header">
       <div class="user-info">
@@ -51,31 +54,32 @@ postBtn.addEventListener('click', function(event) {
 
   let postImageSrc = null;
 
-  if (imageUpload.files[0]) {
+  if (imageUpload.files[0]) { // if an image is selected
     const reader = new FileReader();
+    // starts the process of reading the first selected file and converting it into a data: URL. Once the reading process is complete, you can access the data: URL through reader.result. in other words, data URL gets assigned to postImageSrc
+    reader.readAsDataURL(imageUpload.files[0]);
+    // the function that is assigned to reader.onloadend gets called AFTER the reading is done
     reader.onloadend = function() {
-      postImageSrc = reader.result;
+      postImageSrc = reader.result; //data url of the uploaded image
 
       const newPostCard = createPostCard(
         textarea.value,
         postImageSrc
       );  
-
-      // Insert the new post card into the DOM
-      postComposer.insertAdjacentElement('afterend', newPostCard);
+      // Inserts newPostCard right after postComposer
+      postComposer.insertAdjacentElement('afterend', newPostCard); 
 
       // Clear the textarea and image upload input
       textarea.value = '';
       imageUpload.value = '';
     }
-    reader.readAsDataURL(imageUpload.files[0]);
-  } else {
+  } else { // if an image is NOT selected
     const newPostCard = createPostCard(
       textarea.value,
       postImageSrc
     );  
 
-    // Insert the new post card into the DOM
+    // inserts the new post card into the DOM
     postComposer.insertAdjacentElement('afterend', newPostCard);
 
     // Clear the textarea
