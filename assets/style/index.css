@@ -1,10 +1,10 @@
 @charset "utf-8";
 
 :root {
-  --dark-background: rgb(5, 7, 52);
-  --light-gray: rgb(71, 72, 88);
+  --dark-background: #0d1117;
+  --light-gray: #1b1b1b;
   --white-font: #fff;
-  --fb-blue: rgb(43, 67, 228);
+  --bright-color: #D5FF57;
 }
 
 .container {
@@ -32,14 +32,15 @@ body {
 
 header {
   background-color: var(--light-gray);
-  height: 4rem;
+  height: 3.5rem;
 }
 
 .logo-div {
   display: flex;
   align-items: center;
   .logo {
-    font-size: 1.5rem;
+    font-size: 1.7em;
+    color: var(--bright-color);
   }
 }
 
@@ -70,25 +71,29 @@ nav ul {
 }
 
 nav ul li:not(:last-child) {
-  margin-right: 10px;
+  margin-right: 15px;
 }
 
 nav ul li a {
   text-decoration: none;
+  color: var(--white-font);
+  font-weight: 400;
 }
 
 .pfp-div {
   display: flex;
   justify-content: end;
+  align-items: center;
 }
 
 .pfp {
-  width: 50px;
-  height: 50px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   background-image: url(../media/pfp.jpg);
   background-size: cover;
   background-position: center;
+  cursor: pointer;
 }
 
 /* ==============================modal============================== */
