@@ -1,27 +1,27 @@
-import * as utils from './utils.js';
+import { select, listen } from './utils.js';
 import { User, Subscriber } from './User.js';
 
 'use strict';
 
-const headerPfp = document.querySelector('.pfp-div');
+const headerPfp = select('.pfp-div');
 
-const modal = document.querySelector('.modal');
-const closeModal = document.querySelector('.close-modal');
-const modalContent = document.querySelector('.modal-content');
+const modal = select('.modal');
+const closeModal = select('.close-modal');
+const modalContent = select('.modal-content');
 
-const postComposer = document.querySelector('.post-composer');
-const textarea = document.querySelector('.post-composer textarea');
-const uploadBtn = document.querySelector('.upload-btn');
-const imageUpload = document.querySelector('.image-upload');
-const fileName = document.querySelector('.file-name');
-const postBtn = document.querySelector('.post-btn');
+const postComposer = select('.post-composer');
+const textarea = select('.post-composer textarea');
+const uploadBtn = select('.upload-btn');
+const imageUpload = select('.image-upload');
+const fileName = select('.file-name');
+const postBtn = select('.post-btn');
 
-uploadBtn.addEventListener('click', function(event) {
+listen('click', uploadBtn, function(event) {
   event.preventDefault();
   imageUpload.click(); //this opens the file picker dialogue so u can select an image
 });
 
-imageUpload.addEventListener('change', function() {
+listen('change', imageUpload, function() {
   // a 'change' event occurs when you select a file from the file picker dialog
   if (this.files && this.files[0]) { //checks if at least 1 file has been selected
     // set its text to the file name
@@ -49,8 +49,13 @@ function createPostCard(postContent, postImageSrc) {
   return newPostCard;
 }
 
-postBtn.addEventListener('click', function(event) {
+listen('click', postBtn, function(event) {
   event.preventDefault();
+
+  if (textarea.value.trim() === '' && !imageUpload.files[0]) {
+    // if the user doesn't type anything and doesn't select an image. don't post anything
+    return;
+  }
 
   let postImageSrc = null;
 
@@ -73,7 +78,7 @@ postBtn.addEventListener('click', function(event) {
       textarea.value = '';
       imageUpload.value = '';
     }
-  } else { // if an image is NOT selected
+  } else { // If an image is NOT selected
     const newPostCard = createPostCard(
       textarea.value,
       postImageSrc
@@ -87,7 +92,7 @@ postBtn.addEventListener('click', function(event) {
   }
 
   // Clear the file name
-  document.querySelector('.file-name').innerText = '';
+  select('.file-name').innerText = '';
 });
 
 const johnDoe = new Subscriber(
@@ -100,11 +105,11 @@ const johnDoe = new Subscriber(
   true // canMonetize
 );
 
-headerPfp.addEventListener('click', function() {
+listen('click', headerPfp, function() {
   modalContent.textContent = johnDoe.getInfo();
   modal.showModal();
 });
 
-closeModal.addEventListener('click', function() {
+listen('click', closeModal, function() {
   modal.close();
 });

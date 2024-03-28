@@ -79,7 +79,7 @@ nav ul {
 }
 
 nav ul li:not(:last-child) {
-  margin-right: 15px;
+  margin-right: 2rem;
 }
 
 nav ul li a {
@@ -111,15 +111,26 @@ nav ul li a {
   left: 50%;
   transform: translate(-50%, -50%);
   border: none;
+  border-radius: var(--border-radius);
+  background-color: var(--light-gray);
+  color: var(--white-font);
+  padding: var(--card-padding);
 }
 
 .modal-header {
   display: flex;
   justify-content: space-between;
+  margin-bottom: var(--vertical-spacing);
 }
 
 .close-modal {
-  height: 35px;
+  background-color: transparent;
+  border: none;
+  .fa-x {
+    font-size: 1.4rem;
+    color: var(--white-font);
+    cursor: pointer;
+  }
 }
 
 /* ==============================Post composer============================== */
@@ -130,6 +141,7 @@ nav ul li a {
   border-radius: var(--border-radius);
   background-color: var(--light-gray);
   margin-top: var(--vertical-spacing); 
+  margin-bottom: var(--vertical-spacing); 
 }
 
 .post-composer textarea {
@@ -152,7 +164,16 @@ nav ul li a {
   padding: 5px 10px;
   border: none;
   cursor: pointer;
-  border-radius: 2px;
+  border-radius: 4px;
+}
+
+.upload-btn {
+  padding: 0;
+  background-color: transparent;
+  .fa-image {
+    font-size: 2rem;
+    color: var(--white-font);
+  }
 }
 
 .post-btn {
@@ -169,7 +190,7 @@ nav ul li a {
   border-radius: var(--border-radius);
   background-color: var(--light-gray);
   padding: var(--card-padding);
-  margin-top: var(--vertical-spacing);
+  margin-bottom: var(--vertical-spacing);
   color: var(--white-font);
 }
 
