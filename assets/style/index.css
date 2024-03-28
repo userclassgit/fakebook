@@ -32,15 +32,26 @@ body {
 
 header {
   background-color: var(--light-gray);
+  height: 4rem;
+}
+
+.logo-div {
+  display: flex;
+  align-items: center;
+  .logo {
+    font-size: 1.5rem;
+  }
 }
 
 header > .container {
   justify-content: space-between;
+  height: 100%;
+  align-items: center;
 }
 
 .logo-div, .pfp-div {
   width: 30%;
-  align-items: center;
+  height: 80%;
 }
 
 /* nav */
@@ -55,11 +66,10 @@ nav ul {
   list-style: none;
   display: flex;
   justify-content: center;
+  padding-left: 0;
 }
 
-nav ul li {
-  display: flex;
-  justify-content: center;
+nav ul li:not(:last-child) {
   margin-right: 10px;
 }
 
@@ -67,8 +77,12 @@ nav ul li a {
   text-decoration: none;
 }
 
-
 .pfp-div {
+  display: flex;
+  justify-content: end;
+}
+
+.pfp {
   width: 50px;
   height: 50px;
   border-radius: 50%;
