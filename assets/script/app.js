@@ -77,10 +77,8 @@ function createAndInsertPost(content, imageSrc) {
 
 // Function to clear inputs
 function clearInputs() {
-  // Clear the textarea and image upload input
   textarea.value = '';
   imageUpload.value = '';
-  // Clear the file name
   select('.file-name').innerText = '';
 }
 
