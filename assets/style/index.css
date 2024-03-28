@@ -77,6 +77,24 @@ nav ul li a {
   background-position: center;
 }
 
+/* ==============================modal============================== */
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: none;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.close-modal {
+  height: 35px;
+}
+
 /* ==============================Post composer============================== */
 .post-composer {
   display: flex;
